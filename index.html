@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GLOBAL FUTURE - 8 in 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Orbitron',sans-serif;background:#000;color:#ffd700;overflow-x:hidden}
+.gold-grad{background:linear-gradient(90deg,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header{position:sticky;top:0;z-index:99;background:rgba(0,0,0,.95);border-bottom:2px solid #ffd700;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}
+.card{background:linear-gradient(145deg,#111,#1a1a1a);border:1px solid #ffd700;border-radius:20px;padding:16px;margin:10px;box-shadow:0 0 20px rgba(255,215,0,.15);transition:.3s}
+.card:hover{box-shadow:0 0 30px rgba(255,215,0,.35);transform:translateY(-2px)}
+.btn{border:none;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#ffd700,#ffaa00);color:#000;font-family:Orbitron}
+.btn-dark{background:#111;color:#ffd700;border:1px solid #ffd700}
+input,select,textarea{width:100%;padding:13px;margin:7px 0;background:#0a0a0a;border:1px solid #443a00;border-radius:12px;color:#ffd700;outline:none}
+input:focus{border-color:#ffd700;box-shadow:0 0 10px rgba(255,215,0,.3)}
+.grid8{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
+.app-icon{aspect-ratio:1;background:radial-gradient(circle at top,#222,#000);border:1px solid #ffd700;border-radius:22px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:.3s}
+.app-icon:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,215,0,.5)}
+.app-icon b{font-size:11px;margin-top:8px;text-align:center}
+.page{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:999;display:none;flex-direction:column;overflow-y:auto;padding-bottom:20px}
+.live-dot{width:10px;height:10px;background:#00ff00;border-radius:50%;box-shadow:0 0 10px #00ff00;display:inline-block;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ball{width:100%;height:120px;background:linear-gradient(90deg,#111,#222);border-radius:16px;display:flex;align-items:center;justify-content:space-around;border:1px solid #333}
+</style>
+</head>
+<body>
+
+<div id="home">
+<div class="header"><h2 class="gold-grad">GLOBAL FUTURE</h2><span style="font-size:10px">8 IN 1 • 2035 EDITION</span></div>
+<div style="padding:16px;text-align:center"><h1 style="font-size:28px" class="gold-grad">SABUWAR DUNIYA</h1><p style="color:#888;font-size:11px;margin-top:6px">Duk duniya a wayarka daya - Black & Gold Future</p></div>
+
+<div class="grid8">
+<div class="app-icon" onclick="openApp('locate')"><span style="font-size:32px">🌍</span><b>GANIN DAN UWA</b><small style="font-size:8px;color:#0f0">LIVE LOCATION</small></div>
+<div class="app-icon" onclick="openApp('photos')"><span style="font-size:32px">🖼️</span><b>PHOTO VAULT</b><small style="font-size:8px">AJIYE HOTO</small></div>
+<div class="app-icon" onclick="openApp('money')"><span style="font-size:32px">💸</span><b>TURA KUDI</b><small style="font-size:8px">P2P TRANSFER</small></div>
+<div class="app-icon" onclick="openApp('ball')"><span style="font-size:32px">⚽</span><b>KALLON BALL</b><small style="font-size:8px">LIVE SCORE</small></div>
+<div class="app-icon" onclick="openApp('business')"><span style="font-size:32px">🏪</span><b>KASUWANCI</b><small style="font-size:8px">REGISTER</small></div>
+<div class="app-icon" onclick="openApp('p2b')"><span style="font-size:32px">🔗</span><b>P2B CONNECT</b><small style="font-size:8px">PEER 2 BUSINESS</small></div>
+<div class="app-icon" onclick="openApp('jobs')" style="grid-column:span 2;border:2px solid #ffd700;background:linear-gradient(145deg,#1a1500,#000)"><span style="font-size:40px">🚀</span><b>AIKIN YI & HADA KASUWANCI</b><small style="font-size:9px;color:#ffd700">★ BABBAN APP ★ GLOBAL JOBS</small></div>
+<div class="app-icon" onclick="openApp('chat')" style="grid-column:span 2"><span style="font-size:28px">💬</span><b>GLOBAL CHAT & CALL</b></div>
+</div>
+
+<div class="card" style="margin-top:16px"><small style="color:#888">REGISTER DA SAURI</small><br><input id="regName" placeholder="Sunanka - Global"><input id="regPhone" placeholder="Phone - 09166904453"><button class="btn" onclick="registerGlobal()">SHIGA FUTURE →</button><p id="regStatus" style="font-size:11px;margin-top:6px;color:#0f0"></p></div>
+</div>
+
+<!-- 1. LOCATE -->
+<div id="app-locate" class="page">
+<div class="header"><b>🌍 GANIN DAN UWA - LIVE</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><p><span class="live-dot"></span> Duk wanda yayi register zaka ganshi live</p><div id="locateList"></div><button class="btn" onclick="shareLocation()">NUNA INA NAKE - SHARE LOCATION</button><div id="mapView" style="height:220px;background:#111;border-radius:14px;margin-top:10px;border:1px solid #333;display:flex;align-items:center;justify-content:center;color:#555">🗺️ MAP FUTURE - Location Live</div></div>
+</div>
+
+<!-- 2. PHOTOS -->
+<div id="app-photos" class="page">
+<div class="header"><b>🖼️ PHOTO VAULT - Sirri</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><input type="file" id="photoInput" accept="image/*" multiple onchange="savePhotos(this)"><div id="photoGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px"></div></div>
+</div>
+
+<!-- 3. MONEY -->
+<div id="app-money" class="page">
+<div class="header"><b>💸 TURA KUDI - P2P</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><p>Balance: <b id="balance" style="font-size:22px">₦ 250,000.00</b></p><input id="sendTo" placeholder="Account / Phone na wanda zaka tura"><input id="sendAmount" placeholder="Amount - 5000" type="number"><button class="btn" onclick="sendMoney()">TURA YANZU →</button><div id="txList" style="margin-top:12px"></div></div>
+</div>
+
+<!-- 4. BALL -->
+<div id="app-ball" class="page">
+<div class="header"><b>⚽ KALLON BALL - LIVE 2035</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div style="padding:12px">
+<div class="card ball"><span>🔵 Man City 2</span><b style="color:#f00">LIVE 67'</b><span>Man Utd 1 🔴</span></div>
+<div class="card ball"><span>⚪ Real Madrid 3</span><b>FT</b><span>Barca 2 🔵🔴</span></div>
+<div class="card"><b>📺 LIVE STREAM</b><br><div style="height:180px;background:#000;border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid #ffd700">▶️ Future Ball Stream - Click Play</div><button class="btn" style="margin-top:8px" onclick="alert('Live Ball zai fara - Premium Feature a Future')">KALLA LIVE</button></div>
+</div>
+</div>
+
+<!-- 5. BUSINESS -->
+<div id="app-business" class="page">
+<div class="header"><b>🏪 REGISTER KASUWANCI</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><input id="bizName" placeholder="Sunan Kasuwanci - Meenah Shoes"><select id="bizType"><option>Shago</option><option>Online Store</option><option>Service</option><option>Food</option></select><textarea id="bizDesc" placeholder="Bayani..."></textarea><button class="btn" onclick="registerBiz()">REGISTER KASUWANCI</button><div id="bizList"></div></div>
+</div>
+
+<!-- 6. P2B -->
+<div id="app-p2b" class="page">
+<div class="header"><b>🔗 P2B - Peer 2 Business</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><p style="font-size:11px;color:#aaa">Mutum da kasuwanci su hadu direct - babu middleman</p><div id="p2bList"></div><button class="btn" onclick="postP2B()">NEMA / BAYAR DA SERVICE</button></div>
+</div>
+
+<!-- 7. JOBS - BABBA -->
+<div id="app-jobs" class="page">
+<div class="header"><b>🚀 GLOBAL JOBS & DEALS - Mafi Girma</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div style="padding:12px">
+<div class="card" style="background:linear-gradient(145deg,#1a1500,#000);border:2px solid #ffd700"><h3 class="gold-grad">NEMO AIKI DAGA KO'INA</h3><input id="jobSkill" placeholder="Skill naka - Coding, Design, Driving..."><select id="jobLocation"><option>Duk Duniya</option><option>Nigeria</option><option>Saudi</option><option>Dubai</option><option>USA Remote</option></select><button class="btn" onclick="searchJobs()">NEMO AIKI YANZU 🌍</button></div>
+<div id="jobResults"></div>
+<div class="card"><b>💼 HADA KASUWANCI</b><p style="font-size:11px;color:#888">Kana Kano zaka iya hada business da mutum a Lagos, Dubai, London</p><button class="btn btn-dark" onclick="createDeal()">+ KIRKIRI DEAL</button></div>
+</div>
+</div>
+
+<!-- 8. CHAT -->
+<div id="app-chat" class="page">
+<div class="header"><b>💬 GLOBAL CHAT</b><button class="btn btn-dark" style="width:auto" onclick="closeApp()">X</button></div>
+<div class="card"><div id="globalChat" style="height:60vh;overflow-y:auto"></div><div style="display:flex;gap:6px;margin-top:8px"><input id="chatInput" placeholder="Rubuta..." style="flex:1"><button class="btn" style="width:auto" onclick="sendGlobalChat()">➤</button></div></div>
+</div>
+
+<script>
+let user=JSON.parse(localStorage.getItem("global_user")||"null");
+let photos=JSON.parse(localStorage.getItem("global_photos")||"[]");
+let txs=JSON.parse(localStorage.getItem("global_txs")||"[]");
+let bizs=JSON.parse(localStorage.getItem("global_biz")||"[]");
+let balance=parseInt(localStorage.getItem("global_bal")||"250000");
+
+function openApp(id){document.getElementById("app-"+id).style.display="flex"; if(id==="locate")renderLocate(); if(id==="photos")renderPhotos(); if(id==="money"){document.getElementById("balance").innerText="₦ "+balance.toLocaleString()+".00";renderTx();} if(id==="business")renderBiz(); if(id==="p2b")renderP2B(); if(id==="jobs")renderJobs(); if(id==="chat")renderChat();}
+function closeApp(){document.querySelectorAll(".page").forEach(p=>p.style.display="none");}
+
+function registerGlobal(){
+  const n=document.getElementById("regName").value.trim(); const p=document.getElementById("regPhone").value.trim();
+  if(n.length<2||p.length<10){alert("Cika suna da number");return;}
+  user={name:n,phone:p,loc:"Kano, NG"}; localStorage.setItem("global_user",JSON.stringify(user));
+  let users=JSON.parse(localStorage.getItem("global_users")||"[]"); users.push(user); localStorage.setItem("global_users",JSON.stringify(users));
+  document.getElementById("regStatus").innerText="✅ An shiga Future! Ka zabi app daga 8 din sama - "+n;
+}
+function renderLocate(){
+  let users=JSON.parse(localStorage.getItem("global_users")||"[]");
+  document.getElementById("locateList").innerHTML=users.map(u=>`<div class="card" style="display:flex;justify-content:space-between"><div><b>${u.name}</b><br><small style="color:#0f0"><span class="live-dot"></span> ${u.phone} - ${u.loc||"Live"}</small></div><button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="alert('Kiran ${u.name} - Future Call')">📞 KIRA</button></div>`).join("")||"<small style='color:#666'>Babu wanda yayi register tukuna a wannan browser</small>";
+}
+function shareLocation(){if(!user){alert("Yi register da fark
